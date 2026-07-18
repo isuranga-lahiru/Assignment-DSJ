@@ -1,90 +1,189 @@
-# StudyMate
+# 📚 StudyMate
 
-StudyMate is a polished full-stack study workspace designed to help students and teams capture knowledge, generate AI summaries, and manage notes through a Claude-connected MCP workflow.
+> A polished full-stack study workspace for capturing notes, generating AI summaries, running quiz sessions, and managing everything through a Claude-connected MCP workflow.
 
-## Tech stack
+---
 
-- **Landing page:** HTML, CSS, vanilla JavaScript
-- **Client:** React + Vite
-- **Server:** Node.js, Express, MongoDB, Mongoose
-- **AI summaries:** Anthropic Claude API with graceful fallback behavior when the key is unavailable
-- **MCP server:** Node.js stdio server using the Model Context Protocol SDK
+## ✨ Features
 
-## Repository structure
+- 📝 **Create, edit & delete notes** — store notes with title, subject, and full content in MongoDB
+- 🔍 **Instant search** — filter notes by title or subject in real time
+- 🤖 **AI Summaries** — generate 3-bullet-point summaries powered by Claude
+- 🧠 **AI Quiz Mode** — auto-generate 3 multiple-choice questions per note
+- 🌙 **Dark / Light mode** — persisted across sessions
+- 🔗 **MCP integration** — list and create notes directly from Claude Desktop
 
-- `landing/` — premium static marketing page
-- `client/` — React app for creating and managing notes
-- `server/` — Express API, MongoDB connection, AI summarization and quiz routes
-- `mcp-server/` — MCP tools for listing and creating notes from Claude
+---
 
-## Features
+## 🛠 Tech Stack
 
-- Create notes with a title, subject, and content
-- Edit, search, and delete notes with a streamlined interface
-- Generate and persist AI summaries with 3 bullet points + 1 quiz question
-- Generate AI quiz mode with 3 MCQs per note
-- Use Claude Desktop or MCP Inspector to list/create notes through your own server
-- Responsive landing page with dark mode and polished UI presentation
+| Layer                 | Technology                                          |
+| --------------------- | --------------------------------------------------- |
+| **Landing page**      | HTML, CSS, Vanilla JavaScript                       |
+| **Frontend (client)** | React 18, Vite                                      |
+| **Backend (server)**  | Node.js, Express, MongoDB, Mongoose                 |
+| **AI features**       | Anthropic Claude API (`claude-3-5-sonnet-20241022`) |
+| **MCP server**        | Node.js stdio — Model Context Protocol SDK          |
 
-## Setup
+---
 
-### 1) Server
+## 📂 Repository Structure
 
-1. Go to `server/`
-2. Install dependencies
-3. Copy `.env.example` to `.env` if needed and update the values
-4. Start the API
+```
+Assignment DSJ/
+├── landing/          # Static marketing/landing page
+├── client/           # React + Vite frontend app
+├── server/           # Express REST API + MongoDB + AI routes
+├── mcp-server/       # MCP stdio server (Claude Desktop integration)
+└── docs/
+    └── screenshots/  # App screenshots for README
+```
 
-Environment variables:
+---
 
-- `PORT` — API port, default `5000`
-- `MONGO_URI` — MongoDB connection string
-- `ANTHROPIC_API_KEY` — optional, used for AI summaries
-- `ANTHROPIC_MODEL` — Claude model name used by the summary route
+## 🚀 Setup
 
-### 2) Client
+> **Prerequisites:** Node.js ≥ 18, MongoDB running locally (or Atlas URI), Anthropic API key (optional — AI features are gracefully skipped without it)
 
-1. Go to `client/`
-2. Install dependencies
-3. Copy `.env.example` to `.env` or `.env.local` if your API runs somewhere else
-4. Start the React app
+---
 
-Environment variable:
+### 1 · Server
 
-- `VITE_API_URL` — base URL for the StudyMate API
+```bash
+cd server
+npm install
+cp .env.example .env   # then fill in your values
+npm run dev
+```
 
-### 3) MCP server
+**`server/.env.example` — variable reference:**
 
-1. Go to `mcp-server/`
-2. Install dependencies
-3. Copy `.env.example` to `.env` if needed
-4. Start the stdio server
+| Variable            | Default                               | Description                                                              |
+| ------------------- | ------------------------------------- | ------------------------------------------------------------------------ |
+| `PORT`              | `5000`                                | Port the Express API listens on                                          |
+| `MONGO_URI`         | `mongodb://127.0.0.1:27017/studymate` | MongoDB connection string (local or Atlas)                               |
+| `ANTHROPIC_API_KEY` | _(empty)_                             | Your Anthropic key — **optional**, AI routes skip gracefully when absent |
+| `ANTHROPIC_MODEL`   | `claude-3-5-sonnet-20241022`          | Claude model used for summarization & quiz generation                    |
 
-Environment variable:
+The API will be available at `http://localhost:5000`.
 
-- `STUDYMATE_API_URL` — base URL for the Express API
+---
 
-## Running the app
+### 2 · Client
 
-- Launch the server on port `5000`
-- Launch the React client on port `5173`
-- Open the landing page from the `landing/` folder or serve it with your preferred static server
+```bash
+cd client
+npm install
+cp .env.example .env.local   # optional — only needed if your API is not on port 5000
+npm run dev
+```
 
-## MCP setup in Claude Desktop
+**`client/.env.example` — variable reference:**
 
-Add the MCP server entry that points to the `mcp-server` folder and runs `node index.js`. Once connected, you can ask Claude things like:
+| Variable       | Default                 | Description                           |
+| -------------- | ----------------------- | ------------------------------------- |
+| `VITE_API_URL` | `http://localhost:5000` | Base URL of the StudyMate Express API |
 
-- "What notes do I have?"
-- "Add a note about React hooks"
+The React app will be available at `http://localhost:5173`.
 
-## Screenshots
+---
 
-Replace the placeholders below with your own captures after running the app:
+### 3 · MCP Server
 
-- `docs/screenshots/landing-page.png` — landing page
-- `docs/screenshots/app-ui.png` — React app with notes list and AI summary
-- `docs/screenshots/mcp-tool-call.png` — MCP tool call working in Claude Desktop or MCP Inspector
+```bash
+cd mcp-server
+npm install
+cp .env.example .env   # optional — only needed if your server runs on a different port
+```
 
-## Notes on commits
+**`mcp-server/.env.example` — variable reference:**
 
-For a polished submission, make several meaningful commits as you complete each part instead of one giant checkpoint commit.
+| Variable            | Default                 | Description                                      |
+| ------------------- | ----------------------- | ------------------------------------------------ |
+| `STUDYMATE_API_URL` | `http://localhost:5000` | Base URL of the Express API the MCP server calls |
+
+**Available MCP tools:**
+
+| Tool          | Description                                                             |
+| ------------- | ----------------------------------------------------------------------- |
+| `list_notes`  | Returns all notes as JSON                                               |
+| `create_note` | Creates a new note — requires `title` and `content`, optional `subject` |
+
+**Claude Desktop config** — add to your `claude_desktop_config.json`:
+
+```json
+{
+  "mcpServers": {
+    "studymate": {
+      "command": "node",
+      "args": ["C:/path/to/Assignment DSJ/mcp-server/index.js"]
+    }
+  }
+}
+```
+
+Once connected, ask Claude things like:
+
+- _"What notes do I have?"_
+- _"Add a note titled React Hooks with subject Frontend"_
+
+---
+
+## 🖥 Screenshots
+
+### App UI — Main Interface
+
+![StudyMate App UI — Dark Mode](docs/screenshots/DarkMode%20UI.jpg)
+
+---
+
+### App UI — Notes View
+
+![StudyMate App UI — Notes](docs/screenshots/UI%201.jpg)
+
+---
+
+### AI Feature — Summarize
+
+![AI Summarize feature](docs/screenshots/AI-summrize.jpg)
+
+---
+
+### AI Feature — Quiz Mode
+
+![AI Quiz Mode](docs/screenshots/AI-Quize.jpg)
+
+---
+
+## 🌐 Running Everything Together
+
+```bash
+# Terminal 1 — Start the backend API
+cd server && npm run dev
+
+# Terminal 2 — Start the React client
+cd client && npm run dev
+
+# Terminal 3 — (Optional) Start the MCP server standalone
+cd mcp-server && node index.js
+```
+
+Then open **http://localhost:5173** in your browser.
+
+---
+
+## 📌 Commit Guidelines
+
+Make **4–5 meaningful commits** as you complete each part — not one giant commit at the end. For example:
+
+```
+feat: add Express API with MongoDB note routes
+feat: add React client with search and CRUD
+feat: integrate Claude AI summarization route
+feat: add MCP server with list_notes and create_note tools
+docs: add screenshots and finalize README
+```
+
+---
+
+_Built for the DSJ Academy Assignment — Full-Stack Notes App with AI + MCP Integration_
