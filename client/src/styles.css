@@ -1,6 +1,12 @@
 :root,
 [data-theme="dark"] {
-  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family:
+    Inter,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
   color: #f4f7ff;
   background: #09111f;
   line-height: 1.5;
@@ -45,10 +51,26 @@ body {
   min-width: 320px;
   min-height: 100vh;
   background:
-    radial-gradient(circle at top left, rgba(127, 107, 255, 0.38), transparent 22%),
-    radial-gradient(circle at top right, rgba(66, 163, 255, 0.24), transparent 24%),
-    radial-gradient(circle at bottom left, rgba(0, 209, 255, 0.14), transparent 28%),
-    radial-gradient(circle at bottom right, rgba(255, 109, 185, 0.12), transparent 24%),
+    radial-gradient(
+      circle at top left,
+      rgba(127, 107, 255, 0.38),
+      transparent 22%
+    ),
+    radial-gradient(
+      circle at top right,
+      rgba(66, 163, 255, 0.24),
+      transparent 24%
+    ),
+    radial-gradient(
+      circle at bottom left,
+      rgba(0, 209, 255, 0.14),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at bottom right,
+      rgba(255, 109, 185, 0.12),
+      transparent 24%
+    ),
     var(--bg);
   color: var(--text);
   position: relative;
@@ -60,7 +82,12 @@ body::before {
   position: fixed;
   inset: 0;
   pointer-events: none;
-  background: linear-gradient(120deg, rgba(255, 255, 255, 0.06), transparent 30%, rgba(255, 255, 255, 0.03));
+  background: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0.06),
+    transparent 30%,
+    rgba(255, 255, 255, 0.03)
+  );
   mix-blend-mode: screen;
 }
 
@@ -94,7 +121,11 @@ button {
   padding: 1.35rem 1.4rem;
   border: 1px solid var(--border);
   border-radius: 28px;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.04));
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.12),
+    rgba(255, 255, 255, 0.04)
+  );
   backdrop-filter: var(--glass);
   -webkit-backdrop-filter: var(--glass);
   box-shadow: var(--shadow);
@@ -129,7 +160,11 @@ button {
 }
 
 .hero-stats div {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.06));
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.18),
+    rgba(255, 255, 255, 0.06)
+  );
   border: 1px solid var(--border);
   border-radius: 22px;
   padding: 1rem 1.15rem;
@@ -157,24 +192,37 @@ button {
 .theme-toggle {
   border: 1px solid var(--border);
   border-radius: 999px;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0.07));
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.22),
+    rgba(255, 255, 255, 0.07)
+  );
   color: var(--text);
   padding: 0.8rem 1rem;
   font-weight: 700;
-  transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease;
   justify-self: start;
   backdrop-filter: var(--glass);
   -webkit-backdrop-filter: var(--glass);
 }
 
 .panel {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.06));
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.16),
+    rgba(255, 255, 255, 0.06)
+  );
   border: 1px solid var(--border);
   border-radius: 28px;
   padding: 1.4rem;
   box-shadow: var(--shadow);
   backdrop-filter: var(--glass);
   -webkit-backdrop-filter: var(--glass);
+  isolation: isolate;
+  overflow: hidden;
 }
 
 .panel-heading {
@@ -212,7 +260,11 @@ button {
   display: grid;
   gap: 1rem;
   padding: 1rem;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.05));
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.12),
+    rgba(255, 255, 255, 0.05)
+  );
   backdrop-filter: var(--glass);
   -webkit-backdrop-filter: var(--glass);
 }
@@ -227,6 +279,19 @@ button {
 .search-bar span {
   color: var(--muted);
   font-size: 0.95rem;
+}
+
+/* Visually hide the "Search notes" label text; keep it accessible */
+.search-bar > span {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 .form-grid {
@@ -265,12 +330,19 @@ button {
   border-radius: 999px;
   padding: 0.9rem 1.2rem;
   font-weight: 700;
-  transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease,
+    border-color 0.2s ease;
 }
 
 .note-form button,
 .note-card__actions button {
-  background: linear-gradient(135deg, rgba(127, 107, 255, 0.95), rgba(154, 140, 255, 0.82));
+  background: linear-gradient(
+    135deg,
+    rgba(127, 107, 255, 0.95),
+    rgba(154, 140, 255, 0.82)
+  );
   color: white;
   box-shadow: 0 12px 30px rgba(127, 107, 255, 0.28);
 }
@@ -282,7 +354,11 @@ button {
 }
 
 .note-card {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.05));
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.14),
+    rgba(255, 255, 255, 0.05)
+  );
   padding: 1.2rem;
   display: grid;
   gap: 1rem;
@@ -339,7 +415,11 @@ button {
   padding: 1rem;
   border: 1px solid var(--border);
   border-radius: 22px;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.05));
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.14),
+    rgba(255, 255, 255, 0.05)
+  );
   box-shadow: var(--shadow);
   backdrop-filter: var(--glass);
   -webkit-backdrop-filter: var(--glass);
@@ -442,7 +522,11 @@ button {
 }
 
 .summary-box {
-  background: linear-gradient(135deg, rgba(127, 107, 255, 0.12), rgba(255, 255, 255, 0.08));
+  background: linear-gradient(
+    135deg,
+    rgba(127, 107, 255, 0.12),
+    rgba(255, 255, 255, 0.08)
+  );
   border: 1px solid rgba(127, 107, 255, 0.26);
   border-radius: 18px;
   padding: 1rem;
@@ -451,13 +535,16 @@ button {
 }
 
 .quiz-box {
-
   .summary-box,
   .quiz-box {
     display: grid;
     gap: 0.75rem;
   }
-  background: linear-gradient(135deg, rgba(127, 107, 255, 0.12), rgba(255, 255, 255, 0.08));
+  background: linear-gradient(
+    135deg,
+    rgba(127, 107, 255, 0.12),
+    rgba(255, 255, 255, 0.08)
+  );
   border: 1px solid rgba(127, 107, 255, 0.26);
   border-radius: 18px;
   padding: 1rem;
@@ -482,7 +569,11 @@ button {
 .quiz-card {
   padding: 0.9rem;
   border-radius: 16px;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.06));
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.16),
+    rgba(255, 255, 255, 0.06)
+  );
   border: 1px solid var(--border);
   backdrop-filter: blur(16px);
 }
@@ -513,6 +604,7 @@ button {
 
 .search-bar {
   min-width: min(320px, 100%);
+  position: relative;
 }
 
 .alert,
@@ -559,10 +651,10 @@ body[data-theme="light"] .note-card__actions button {
     width: min(1180px, calc(100% - 1rem));
     padding-top: 1rem;
 
-  .note-editor-layout,
-  .notes-list {
-    grid-template-columns: 1fr;
-  }
+    .note-editor-layout,
+    .notes-list {
+      grid-template-columns: 1fr;
+    }
   }
 
   .form-grid,
