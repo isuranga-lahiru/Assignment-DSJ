@@ -119,7 +119,7 @@ export default function App() {
           <p className="eyebrow">StudyMate</p>
           <h1>Study notes that can think for you.</h1>
           <p className="app-subtitle">
-            Capture notes, search them instantly, generate AI summaries, and manage everything from Claude via MCP.
+            A polished study workspace for capturing notes, finding them instantly, generating AI summaries, and managing content through Claude-connected workflows.
           </p>
         </div>
         <div className="hero-stats">

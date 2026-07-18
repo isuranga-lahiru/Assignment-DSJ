@@ -1,7 +1,7 @@
 :root,
 [data-theme="dark"] {
   font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  color: #eaf0ff;
+  color: #f4f7ff;
   background: #09111f;
   line-height: 1.5;
   font-weight: 400;
@@ -9,29 +9,31 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  --bg: #09111f;
-  --bg-alt: #111a2e;
-  --panel: rgba(17, 26, 46, 0.88);
-  --border: rgba(255, 255, 255, 0.1);
-  --text: #eaf0ff;
-  --muted: #aeb8d0;
+  --bg: #070b16;
+  --bg-alt: rgba(18, 25, 42, 0.58);
+  --panel: rgba(13, 18, 34, 0.58);
+  --border: rgba(255, 255, 255, 0.14);
+  --text: #f4f7ff;
+  --muted: #cad4ea;
   --primary: #7f6bff;
   --primary-strong: #9a8cff;
   --shadow: 0 24px 60px rgba(0, 0, 0, 0.34);
+  --glass: blur(22px) saturate(145%);
 }
 
 [data-theme="light"] {
-  color: #101727;
-  background: #f6f7fb;
-  --bg: #f6f7fb;
-  --bg-alt: #ffffff;
-  --panel: rgba(255, 255, 255, 0.9);
-  --border: rgba(16, 23, 39, 0.12);
-  --text: #101727;
-  --muted: #5d6472;
-  --primary: #6d5efc;
-  --primary-strong: #4f40d8;
-  --shadow: 0 18px 42px rgba(16, 23, 39, 0.12);
+  color: #0f172a;
+  background: #eaf0ff;
+  --bg: #eaf0ff;
+  --bg-alt: rgba(255, 255, 255, 0.72);
+  --panel: rgba(255, 255, 255, 0.64);
+  --border: rgba(15, 23, 42, 0.12);
+  --text: #0f172a;
+  --muted: #4b5568;
+  --primary: #5b5ef7;
+  --primary-strong: #4a48d6;
+  --shadow: 0 18px 42px rgba(15, 23, 42, 0.12);
+  --glass: blur(22px) saturate(150%);
 }
 
 * {
@@ -43,10 +45,23 @@ body {
   min-width: 320px;
   min-height: 100vh;
   background:
-    radial-gradient(circle at top left, rgba(127, 107, 255, 0.18), transparent 28%),
-    radial-gradient(circle at top right, rgba(66, 163, 255, 0.12), transparent 26%),
+    radial-gradient(circle at top left, rgba(127, 107, 255, 0.38), transparent 22%),
+    radial-gradient(circle at top right, rgba(66, 163, 255, 0.24), transparent 24%),
+    radial-gradient(circle at bottom left, rgba(0, 209, 255, 0.14), transparent 28%),
+    radial-gradient(circle at bottom right, rgba(255, 109, 185, 0.12), transparent 24%),
     var(--bg);
   color: var(--text);
+  position: relative;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(120deg, rgba(255, 255, 255, 0.06), transparent 30%, rgba(255, 255, 255, 0.03));
+  mix-blend-mode: screen;
 }
 
 button,
@@ -67,6 +82,7 @@ button {
   width: min(1180px, calc(100% - 2rem));
   margin: 0 auto;
   padding: 2rem 0 3rem;
+  position: relative;
 }
 
 .app-hero {
@@ -75,6 +91,13 @@ button {
   align-items: end;
   gap: 1.5rem;
   margin-bottom: 1.5rem;
+  padding: 1.35rem 1.4rem;
+  border: 1px solid var(--border);
+  border-radius: 28px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.04));
+  backdrop-filter: var(--glass);
+  -webkit-backdrop-filter: var(--glass);
+  box-shadow: var(--shadow);
 }
 
 .eyebrow {
@@ -106,12 +129,14 @@ button {
 }
 
 .hero-stats div {
-  background: var(--panel);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.06));
   border: 1px solid var(--border);
   border-radius: 22px;
   padding: 1rem 1.15rem;
   min-width: 150px;
   box-shadow: var(--shadow);
+  backdrop-filter: var(--glass);
+  -webkit-backdrop-filter: var(--glass);
 }
 
 .hero-stats strong {
@@ -132,21 +157,24 @@ button {
 .theme-toggle {
   border: 1px solid var(--border);
   border-radius: 999px;
-  background: var(--bg-alt);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0.07));
   color: var(--text);
   padding: 0.8rem 1rem;
   font-weight: 700;
-  transition: transform 0.2s ease, background 0.2s ease;
+  transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
   justify-self: start;
+  backdrop-filter: var(--glass);
+  -webkit-backdrop-filter: var(--glass);
 }
 
 .panel {
-  background: var(--panel);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.06));
   border: 1px solid var(--border);
   border-radius: 28px;
   padding: 1.4rem;
   box-shadow: var(--shadow);
-  backdrop-filter: blur(18px);
+  backdrop-filter: var(--glass);
+  -webkit-backdrop-filter: var(--glass);
 }
 
 .panel-heading {
@@ -168,6 +196,7 @@ button {
   justify-content: space-between;
   gap: 1rem;
   align-items: end;
+  flex-wrap: wrap;
 }
 
 .note-form,
@@ -183,7 +212,9 @@ button {
   display: grid;
   gap: 1rem;
   padding: 1rem;
-  background: rgba(255, 255, 255, 0.02);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.05));
+  backdrop-filter: var(--glass);
+  -webkit-backdrop-filter: var(--glass);
 }
 
 .note-form label,
@@ -211,8 +242,15 @@ button {
   border: 1px solid var(--border);
   border-radius: 16px;
   padding: 0.9rem 1rem;
-  background: rgba(9, 17, 31, 0.55);
+  background: rgba(255, 255, 255, 0.34);
   color: var(--text);
+  backdrop-filter: blur(14px);
+}
+
+.note-form input::placeholder,
+.note-form textarea::placeholder,
+.search-bar input::placeholder {
+  color: color-mix(in srgb, var(--muted) 78%, transparent);
 }
 
 .note-form textarea {
@@ -232,8 +270,9 @@ button {
 
 .note-form button,
 .note-card__actions button {
-  background: linear-gradient(135deg, var(--primary), var(--primary-strong));
+  background: linear-gradient(135deg, rgba(127, 107, 255, 0.95), rgba(154, 140, 255, 0.82));
   color: white;
+  box-shadow: 0 12px 30px rgba(127, 107, 255, 0.28);
 }
 
 .note-form button:disabled,
@@ -243,10 +282,13 @@ button {
 }
 
 .note-card {
-  background: rgba(255, 255, 255, 0.03);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.05));
   padding: 1.2rem;
   display: grid;
   gap: 1rem;
+  align-content: start;
+  backdrop-filter: var(--glass);
+  -webkit-backdrop-filter: var(--glass);
 }
 
 .note-card__header-actions {
@@ -261,9 +303,75 @@ button {
   gap: 1rem;
 }
 
+.note-editor-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(260px, 0.9fr);
+  gap: 1rem;
+  align-items: start;
+}
+
+.editor-head,
+.note-preview__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.editor-kicker {
+  margin: 0 0 0.25rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--primary);
+  font-size: 0.72rem;
+  font-weight: 800;
+}
+
+.editor-head h3,
+.note-preview__card h3 {
+  margin: 0;
+  letter-spacing: -0.04em;
+}
+
+.note-preview {
+  display: grid;
+  gap: 0.85rem;
+  padding: 1rem;
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.05));
+  box-shadow: var(--shadow);
+  backdrop-filter: var(--glass);
+  -webkit-backdrop-filter: var(--glass);
+}
+
+.note-preview__header span {
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.note-preview__card {
+  display: grid;
+  gap: 0.75rem;
+  padding: 1rem;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid var(--border);
+}
+
+.note-preview__hint {
+  padding: 0.9rem 1rem;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--muted);
+  border: 1px solid var(--border);
+}
+
 .notes-list {
   display: grid;
   gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  align-items: start;
 }
 
 .note-card__header {
@@ -290,7 +398,7 @@ button {
 .note-card__content {
   white-space: pre-wrap;
   margin: 0;
-  color: #dce5ff;
+  color: var(--text);
 }
 
 .note-card__actions {
@@ -309,9 +417,22 @@ button {
 }
 
 .ghost-button {
-  background: transparent;
+  background: rgba(255, 255, 255, 0.14);
   color: var(--muted);
   border: 1px solid var(--border);
+  backdrop-filter: blur(12px);
+}
+
+.ghost-button--edit:hover {
+  color: #8b5cf6;
+  border-color: rgba(139, 92, 246, 0.45);
+  background: rgba(139, 92, 246, 0.14);
+}
+
+.ghost-button--delete:hover {
+  color: #ef4444;
+  border-color: rgba(239, 68, 68, 0.45);
+  background: rgba(239, 68, 68, 0.14);
 }
 
 .ghost-button:hover,
@@ -321,17 +442,27 @@ button {
 }
 
 .summary-box {
-  background: rgba(127, 107, 255, 0.08);
-  border: 1px solid rgba(127, 107, 255, 0.28);
+  background: linear-gradient(135deg, rgba(127, 107, 255, 0.12), rgba(255, 255, 255, 0.08));
+  border: 1px solid rgba(127, 107, 255, 0.26);
   border-radius: 18px;
   padding: 1rem;
+  backdrop-filter: var(--glass);
+  -webkit-backdrop-filter: var(--glass);
 }
 
 .quiz-box {
-  background: rgba(127, 107, 255, 0.08);
-  border: 1px solid rgba(127, 107, 255, 0.28);
+
+  .summary-box,
+  .quiz-box {
+    display: grid;
+    gap: 0.75rem;
+  }
+  background: linear-gradient(135deg, rgba(127, 107, 255, 0.12), rgba(255, 255, 255, 0.08));
+  border: 1px solid rgba(127, 107, 255, 0.26);
   border-radius: 18px;
   padding: 1rem;
+  backdrop-filter: var(--glass);
+  -webkit-backdrop-filter: var(--glass);
 }
 
 .quiz-box h4 {
@@ -351,8 +482,9 @@ button {
 .quiz-card {
   padding: 0.9rem;
   border-radius: 16px;
-  background: var(--bg-alt);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.06));
   border: 1px solid var(--border);
+  backdrop-filter: blur(16px);
 }
 
 .quiz-options {
@@ -372,7 +504,7 @@ button {
 .summary-box ul {
   margin: 0;
   padding-left: 1.2rem;
-  color: #edf1ff;
+  color: var(--text);
 }
 
 .quiz-question {
@@ -387,12 +519,27 @@ button {
 .state-card {
   margin-top: 1rem;
   padding: 1rem 1.1rem;
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--text);
 }
 
 .alert {
   border-color: rgba(255, 120, 120, 0.4);
-  color: #ffd3d3;
+  color: #b91c1c;
+}
+
+body[data-theme="light"] .note-card__subject,
+body[data-theme="light"] .hero-stats span,
+body[data-theme="light"] .panel-heading p,
+body[data-theme="light"] .quiz-box__hint,
+body[data-theme="light"] .note-form span,
+body[data-theme="light"] .search-bar span {
+  color: #475569;
+}
+
+body[data-theme="light"] .note-form button,
+body[data-theme="light"] .note-card__actions button {
+  box-shadow: 0 12px 30px rgba(91, 94, 247, 0.26);
 }
 
 @media (max-width: 960px) {
@@ -411,11 +558,22 @@ button {
   .app-shell {
     width: min(1180px, calc(100% - 1rem));
     padding-top: 1rem;
+
+  .note-editor-layout,
+  .notes-list {
+    grid-template-columns: 1fr;
+  }
   }
 
   .form-grid,
   .hero-stats {
     grid-template-columns: 1fr;
+  }
+
+  .editor-head,
+  .note-preview__header,
+  .note-card__header {
+    flex-direction: column;
   }
 
   .note-card__header {

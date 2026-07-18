@@ -1,29 +1,30 @@
 # StudyMate
 
-StudyMate is a full-stack study notes app where students can create notes, search and delete them, generate AI summaries, and manage notes from Claude through an MCP server.
+StudyMate is a polished full-stack study workspace designed to help students and teams capture knowledge, generate AI summaries, and manage notes through a Claude-connected MCP workflow.
 
 ## Tech stack
 
 - **Landing page:** HTML, CSS, vanilla JavaScript
 - **Client:** React + Vite
 - **Server:** Node.js, Express, MongoDB, Mongoose
-- **AI summaries:** Anthropic Claude API with a graceful fallback when the API key is missing
+- **AI summaries:** Anthropic Claude API with graceful fallback behavior when the key is unavailable
 - **MCP server:** Node.js stdio server using the Model Context Protocol SDK
 
 ## Repository structure
 
-- `landing/` — static marketing page
+- `landing/` — premium static marketing page
 - `client/` — React app for creating and managing notes
-- `server/` — Express API, MongoDB connection, AI summarization route
+- `server/` — Express API, MongoDB connection, AI summarization and quiz routes
 - `mcp-server/` — MCP tools for listing and creating notes from Claude
 
 ## Features
 
 - Create notes with a title, subject, and content
-- Fetch, search, and delete notes
+- Edit, search, and delete notes with a streamlined interface
 - Generate and persist AI summaries with 3 bullet points + 1 quiz question
-- Use Claude Desktop or MCP Inspector to list/create notes with your own server
-- Responsive landing page with a dark-mode toggle and FAQ accordion
+- Generate AI quiz mode with 3 MCQs per note
+- Use Claude Desktop or MCP Inspector to list/create notes through your own server
+- Responsive landing page with dark mode and polished UI presentation
 
 ## Setup
 

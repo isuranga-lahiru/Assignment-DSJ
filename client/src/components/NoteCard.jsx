@@ -46,10 +46,10 @@ export default function NoteCard({ note, onDelete, onSummarize, onUpdate, onQuiz
               <h3>{note.title}</h3>
             </div>
             <div className="note-card__header-actions">
-              <button className="ghost-button" type="button" onClick={() => setIsEditing(true)}>
+              <button className="ghost-button ghost-button--edit" type="button" onClick={() => setIsEditing(true)}>
                 Edit
               </button>
-              <button className="ghost-button" type="button" onClick={() => onDelete(note._id)}>
+              <button className="ghost-button ghost-button--delete" type="button" onClick={() => onDelete(note._id)}>
                 Delete
               </button>
             </div>
@@ -58,28 +58,56 @@ export default function NoteCard({ note, onDelete, onSummarize, onUpdate, onQuiz
           <p className="note-card__content">{note.content}</p>
         </>
       ) : (
-        <form className="note-editor" onSubmit={handleSave}>
-          <div className="form-grid">
+        <div className="note-editor-layout">
+          <form className="note-editor" onSubmit={handleSave}>
+            <div className="editor-head">
+              <div>
+                <p className="editor-kicker">Editing note</p>
+                <h3>Update your study note</h3>
+              </div>
+              <button type="button" className="ghost-button" onClick={() => setIsEditing(false)}>
+                Close editor
+              </button>
+            </div>
+
+            <div className="form-grid">
+              <label>
+                <span>Title</span>
+                <input name="title" value={editor.title} onChange={handleEditorChange} />
+              </label>
+              <label>
+                <span>Subject</span>
+                <input name="subject" value={editor.subject} onChange={handleEditorChange} />
+              </label>
+            </div>
+
             <label>
-              <span>Title</span>
-              <input name="title" value={editor.title} onChange={handleEditorChange} />
+              <span>Content</span>
+              <textarea name="content" rows="8" value={editor.content} onChange={handleEditorChange} />
             </label>
-            <label>
-              <span>Subject</span>
-              <input name="subject" value={editor.subject} onChange={handleEditorChange} />
-            </label>
-          </div>
-          <label>
-            <span>Content</span>
-            <textarea name="content" rows="6" value={editor.content} onChange={handleEditorChange} />
-          </label>
-          <div className="note-card__actions note-card__actions--edit">
-            <button type="submit">Save changes</button>
-            <button type="button" className="ghost-button" onClick={() => setIsEditing(false)}>
-              Cancel
-            </button>
-          </div>
-        </form>
+
+            <div className="note-card__actions note-card__actions--edit">
+              <button type="submit">Save changes</button>
+            </div>
+          </form>
+
+          <aside className="note-preview">
+            <div className="note-preview__header">
+              <p className="editor-kicker">Live preview</p>
+              <span>How this note will appear</span>
+            </div>
+            <div className="note-preview__card">
+              <p className="note-card__subject">{editor.subject || "General"}</p>
+              <h3>{editor.title || "Untitled note"}</h3>
+              <p className="note-card__content">
+                {editor.content || "Your updated content will appear here in real time."}
+              </p>
+            </div>
+            <div className="note-preview__hint">
+              <strong>Tip:</strong> Keep the title concise and use the content area for clear, structured revision points.
+            </div>
+          </aside>
+        </div>
       )}
 
       <div className="note-card__actions note-card__actions--primary">

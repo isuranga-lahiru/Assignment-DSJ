@@ -1,25 +1,27 @@
 :root {
   color-scheme: light;
   --bg: #f7f7ff;
-  --bg-alt: #ffffff;
+  --bg-alt: rgba(255, 255, 255, 0.58);
   --text: #111827;
   --muted: #5b6475;
   --primary: #6d5efc;
   --primary-strong: #5546e0;
   --border: rgba(17, 24, 39, 0.12);
   --shadow: 0 24px 60px rgba(44, 48, 76, 0.12);
+  --glass: blur(22px) saturate(150%);
 }
 
 body.dark {
   color-scheme: dark;
-  --bg: #0f1220;
-  --bg-alt: #171b2f;
+  --bg: #090d19;
+  --bg-alt: rgba(20, 26, 44, 0.58);
   --text: #f4f6ff;
   --muted: #bac2e0;
   --primary: #8a7dff;
   --primary-strong: #a59cff;
-  --border: rgba(255, 255, 255, 0.12);
+  --border: rgba(255, 255, 255, 0.14);
   --shadow: 0 28px 60px rgba(0, 0, 0, 0.32);
+  --glass: blur(22px) saturate(150%);
 }
 
 * {
@@ -33,9 +35,24 @@ html {
 body {
   margin: 0;
   font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  background: radial-gradient(circle at top, rgba(109, 94, 252, 0.18), transparent 34%), var(--bg);
+  background:
+    radial-gradient(circle at top left, rgba(109, 94, 252, 0.28), transparent 28%),
+    radial-gradient(circle at top right, rgba(66, 163, 255, 0.18), transparent 24%),
+    radial-gradient(circle at bottom left, rgba(0, 209, 255, 0.08), transparent 28%),
+    var(--bg);
   color: var(--text);
   min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(120deg, rgba(255, 255, 255, 0.05), transparent 30%, rgba(255, 255, 255, 0.03));
+  mix-blend-mode: screen;
 }
 
 a {
@@ -50,6 +67,7 @@ a {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  position: relative;
 }
 
 .brand {
@@ -60,14 +78,16 @@ a {
 
 .theme-toggle {
   border: 1px solid var(--border);
-  background: var(--bg-alt);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.05));
   color: var(--text);
   width: 44px;
   height: 44px;
   border-radius: 14px;
   box-shadow: var(--shadow);
   cursor: pointer;
-  transition: transform 0.2s ease, border-color 0.2s ease;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  backdrop-filter: var(--glass);
+  -webkit-backdrop-filter: var(--glass);
 }
 
 .theme-toggle:hover,
@@ -81,6 +101,7 @@ a {
   max-width: 1120px;
   margin: 0 auto;
   padding: 4rem 1.5rem;
+  position: relative;
 }
 
 .hero {
@@ -88,6 +109,26 @@ a {
   grid-template-columns: 1.3fr 0.9fr;
   gap: 2rem;
   align-items: center;
+}
+
+.hero::before,
+.section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 30px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.03));
+  box-shadow: var(--shadow);
+  backdrop-filter: var(--glass);
+  -webkit-backdrop-filter: var(--glass);
+  z-index: 0;
+}
+
+.hero > *,
+.section > * {
+  position: relative;
+  z-index: 1;
 }
 
 .eyebrow {
@@ -131,6 +172,8 @@ a {
   border: 1px solid var(--border);
   font-weight: 700;
   transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+  backdrop-filter: var(--glass);
+  -webkit-backdrop-filter: var(--glass);
 }
 
 .button-primary {
@@ -144,7 +187,7 @@ a {
 }
 
 .button-secondary {
-  background: var(--bg-alt);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.05));
 }
 
 .typing-line {
@@ -163,10 +206,12 @@ a {
 .stat-card,
 .feature-card,
 .faq-panel {
-  background: var(--bg-alt);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.04));
   border: 1px solid var(--border);
   border-radius: 24px;
   box-shadow: var(--shadow);
+  backdrop-filter: var(--glass);
+  -webkit-backdrop-filter: var(--glass);
 }
 
 .stat-card {
@@ -232,10 +277,12 @@ a {
   padding: 1.2rem 1.35rem;
   border: 1px solid var(--border);
   border-radius: 18px;
-  background: var(--bg-alt);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.05));
   color: var(--text);
   cursor: pointer;
   box-shadow: var(--shadow);
+  backdrop-filter: var(--glass);
+  -webkit-backdrop-filter: var(--glass);
 }
 
 .faq-item strong {
