@@ -44,8 +44,28 @@ export async function deleteNote(noteId) {
   return handleResponse(response);
 }
 
+export async function updateNote(noteId, note) {
+  const response = await fetch(`${API_BASE}/api/notes/${noteId}`, {
+    method: "PUT",
+    headers: {
+      "content-type": "application/json",
+    },
+    body: JSON.stringify(note),
+  });
+
+  return handleResponse(response);
+}
+
 export async function summarizeNote(noteId) {
   const response = await fetch(`${API_BASE}/api/notes/${noteId}/summarize`, {
+    method: "POST",
+  });
+
+  return handleResponse(response);
+}
+
+export async function createQuiz(noteId) {
+  const response = await fetch(`${API_BASE}/api/notes/${noteId}/quiz`, {
     method: "POST",
   });
 

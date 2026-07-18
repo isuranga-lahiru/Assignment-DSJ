@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { createNote, deleteNote, fetchNotes, summarizeNote } from "./api";
+import { createNote, createQuiz, deleteNote, fetchNotes, summarizeNote, updateNote } from "./api";
 import NoteForm from "./components/NoteForm";
 import NoteCard from "./components/NoteCard";
 import SearchBar from "./components/SearchBar";
@@ -11,6 +11,13 @@ export default function App() {
   const [searchTerm, setSearchTerm] = useState("");
   const [error, setError] = useState("");
   const [activeSummaryId, setActiveSummaryId] = useState("");
+  const [activeQuizId, setActiveQuizId] = useState("");
+  const [theme, setTheme] = useState(() => localStorage.getItem("studymate-theme") || "dark");
+
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme;
+    localStorage.setItem("studymate-theme", theme);
+  }, [theme]);
 
   useEffect(() => {
     void loadNotes();
@@ -69,6 +76,29 @@ export default function App() {
     }
   }
 
+  async function handleUpdate(noteId, noteData) {
+    try {
+      setError("");
+      const updatedNote = await updateNote(noteId, noteData);
+      setNotes((current) => current.map((note) => (note._id === noteId ? updatedNote : note)));
+    } catch (updateError) {
+      setError(updateError.message);
+    }
+  }
+
+  async function handleQuiz(noteId) {
+    try {
+      setError("");
+      setActiveQuizId(noteId);
+      const updatedNote = await createQuiz(noteId);
+      setNotes((current) => current.map((note) => (note._id === noteId ? updatedNote : note)));
+    } catch (quizError) {
+      setError(quizError.message);
+    } finally {
+      setActiveQuizId("");
+    }
+  }
+
   const filteredNotes = useMemo(() => {
     const query = searchTerm.trim().toLowerCase();
     if (!query) {
@@ -102,6 +132,9 @@ export default function App() {
             <span>Visible notes</span>
           </div>
         </div>
+        <button className="theme-toggle" type="button" onClick={() => setTheme((current) => (current === "dark" ? "light" : "dark"))}>
+          {theme === "dark" ? "☀️ Light mode" : "🌙 Dark mode"}
+        </button>
       </header>
 
       <main className="app-grid">
@@ -136,7 +169,10 @@ export default function App() {
                   note={note}
                   onDelete={handleDelete}
                   onSummarize={handleSummarize}
+                  onUpdate={handleUpdate}
+                  onQuiz={handleQuiz}
                   isSummarizing={activeSummaryId === note._id}
+                  isQuizLoading={activeQuizId === note._id}
                 />
               ))}
             </div>
