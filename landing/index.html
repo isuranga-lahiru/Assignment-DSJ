@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="StudyMate helps students capture notes, summarize them with AI, and manage everything from one place." />
+    <title>StudyMate</title>
+    <link rel="stylesheet" href="style.css" />
+    <script defer src="script.js"></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="#home">StudyMate</a>
+      <button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle dark mode">🌙</button>
+    </header>
+
+    <main id="home">
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">AI-powered study notes</p>
+          <h1>Keep your notes organized, summarized, and ready for review.</h1>
+          <p class="lead">
+            StudyMate helps you capture lecture notes, turn them into quick summaries, and manage your study life from one clean workspace.
+          </p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="../client/">Open App</a>
+            <a class="button button-secondary" href="#features">See Features</a>
+          </div>
+          <p class="typing-line" aria-live="polite">Built for students who like fewer tabs and better grades.</p>
+        </div>
+
+        <div class="hero-panel">
+          <div class="stat-card">
+            <span>3-step flow</span>
+            <strong>Write → Summarize → Review</strong>
+          </div>
+          <div class="stat-card accent">
+            <span>MCP ready</span>
+            <strong>Manage notes from Claude</strong>
+          </div>
+        </div>
+      </section>
+
+      <section id="features" class="section">
+        <h2>Everything you need for smarter study sessions</h2>
+        <div class="feature-grid">
+          <article class="feature-card">
+            <h3>Capture notes fast</h3>
+            <p>Drop in titles, subjects, and content without wrestling with complex menus.</p>
+          </article>
+          <article class="feature-card">
+            <h3>Summarize with AI</h3>
+            <p>Generate quick bullet-point summaries and a quiz question for active recall.</p>
+          </article>
+          <article class="feature-card">
+            <h3>Use Claude via MCP</h3>
+            <p>Query and create notes directly from Claude Desktop with your own MCP server.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section faq-section">
+        <h2>Quick questions</h2>
+        <div class="faq-list" data-accordion>
+          <button class="faq-item" type="button" aria-expanded="false">
+            <span>Does StudyMate work on mobile?</span>
+            <strong>+</strong>
+          </button>
+          <div class="faq-panel">
+            Yes — the layout is responsive and collapses nicely on smaller screens.
+          </div>
+
+          <button class="faq-item" type="button" aria-expanded="false">
+            <span>Can I use my own AI API key?</span>
+            <strong>+</strong>
+          </button>
+          <div class="faq-panel">
+            Absolutely. The server reads the key from environment variables and falls back gracefully if the key is missing.
+          </div>
+
+          <button class="faq-item" type="button" aria-expanded="false">
+            <span>Is the MCP server separate?</span>
+            <strong>+</strong>
+          </button>
+          <div class="faq-panel">
+            Yes, the MCP server runs over stdio and talks to the Express API to list or create notes.
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
