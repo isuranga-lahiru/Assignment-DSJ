@@ -1,4 +1,4 @@
-const API_BASE = (import.meta.env.VITE_API_URL || "http://localhost:5000").replace(/\/$/, "");
+const API_BASE = (import.meta.env.VITE_API_URL || "https://assignment-dsj-1.onrender.com").replace(/\/$/, "");
 
 async function handleResponse(response) {
   const text = await response.text();
